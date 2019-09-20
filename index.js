@@ -218,6 +218,7 @@ function updateList() {
     }
     li.style.color = colors[colors.length - 1];
     list.appendChild(li);
+    btn3.disabled = true;
 }
 
 function randomColor() {
