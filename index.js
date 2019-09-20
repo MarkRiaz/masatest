@@ -1,34 +1,36 @@
-let myAge;
-let myName;
+var btn = document.getElementById('btn');
+var input = document.getElementById('input');
+var list = document.getElementById('list');
 
-myName = "Michael";
+var colors = [];
 
-myName = 2;
+btn.addEventListener('click', getColor);
+input.addEventListener('keyup', inputChange)
 
-myName = undefined;
+btn.disabled = true;
 
-myName = "Vlad";
+function inputChange() {
+    if (/^#[0-9A-F]{6}$/i.test(input.value)) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+}
 
-myName = myName = 2;
+function getColor() {
+    var result = input.value;
+    input.value = "";
+    btn.disabled = true;
+    colors.push(result);
+    updateList();
+}
 
-console.log(typeof myName) // string
-console.log(typeof myAge) // number
+function updateList() {
+    var li = document.createElement('li');
+    li.innerText = "HEX:" + colors[colors.length - 1];
+    li.style.color = colors[colors.length - 1];
+    list.appendChild(li);
+}
 
-var array = [1,false,"232323", [1,2,3,4,5] ,5,6,7,8,9];
-array[4567] // undefined
 
-var user = {
-    name: "Michael",
-    surname: "Kronenberg",
-    friends: ["Amber", "Ann", {
-        name: "test",
-        surname: "test 5"
-    }]
-};
 
-var y = 2;
-var y = 4;
-var y = 10;
-var y = 50;
-
-console.log(y)
