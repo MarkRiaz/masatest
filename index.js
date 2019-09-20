@@ -198,13 +198,23 @@ function findColoursBetween(strHEX) {
 
 function updateList() {
     var li = document.createElement('li');
-    if(col[colors[colors.length - 1]]){
+    if(col[colors[colors.length - 1]]) {
         li.innerText = col[colors[colors.length - 1]];
     } else {
         var between = findColoursBetween(colors[colors.length - 1]);
         var bigger = col[between[0]];
         var smaller = col[between[1]];
-        li.innerText = "Between: " + smaller + " and " + bigger;
+        var sSpan = document.createElement("span");
+        var bSpan = document.createElement("span");
+
+        li.innerHTML += "Between: ";
+        sSpan.style.color = between[1];
+        sSpan.innerText = smaller;
+        li.appendChild(sSpan);
+        li.innerHTML += " and ";
+        bSpan.style.color = between[0];
+        bSpan.innerText =  bigger;
+        li.appendChild(bSpan);
     }
     li.style.color = colors[colors.length - 1];
     list.appendChild(li);
