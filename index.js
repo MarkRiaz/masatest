@@ -36,11 +36,11 @@ function updateList() {
     li.innerText = "HEX:" + colors[colors.length - 1];
     li.style.color = colors[colors.length - 1];
     b = li.style.color;
-    li.innerText = "HEX:" + colors[colors.length - 1] + " " + b;
+    li.innerText = "HEX:" + colors[colors.length - 1] + " " + b;// Добавление в список РГБ имен цветов
     list.appendChild(li);
 }
 
-function randomColor() {
+function randomColor() {                                         //Создание функции которая рандомит цвет
     var fst = '#' , baza = 'ABCDEF123456789' , x;
         for (let i = 0; i < 6; i++) {
             x = Math.floor(Math.random() * Math.floor(baza.length));
@@ -51,7 +51,7 @@ function randomColor() {
     updateList();
 }
 
-function srchGoogle() {
+function srchGoogle() {                                         //Создание функции которая ищет в гугле
     var y = colors[colors.length - 1];
     y = y.replace('#','%23');
     window.open('https://www.google.com/search?q='+y);
