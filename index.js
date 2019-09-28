@@ -1,36 +1,91 @@
-var btn = document.getElementById('btn');
-var input = document.getElementById('input');
-var list = document.getElementById('list');
+const data = [
+    {
+        type: "green",
+        name: "Lun Jzi",
+        price: 17,
+        weight: 50,
+        voteto: [{
+            name: "asdsadsadsada"
+        }]
+    },
+    {
+        price: 50,
+        type: "white",
+        name: "Bai Hao In Zhen",
+        weight: 50
+    }
+];
 
-var colors = [];
+const dataNext = [
+    {
+        user: "misha",
+        age: 23
+    },
+    {
+       user: "vlad",
+        age: 25
+    }
+];
 
-btn.addEventListener('click', getColor);
-input.addEventListener('keyup', inputChange)
+class Table {
+    constructor(name, data) {
+        this.name = name;
+        this.root = null;
+        this.data = data;
+        this.raw = null;
+        this.cells = null;
+    }
 
-btn.disabled = true;
+    init() {
+        // create root element div
+        try {
+        this.root = document.getElementById(this.name);
+        this.root.classList.add("tbl-content");
+        const table = document.createElement('table');
+        const trHEAD = document.createElement('tr');
 
-function inputChange() {
-    if (/^#[0-9A-F]{6}$/i.test(input.value)) {
-        btn.disabled = false;
-    } else {
-        btn.disabled = true;
+        // initialize data
+        this.raw = Object.keys(this.data[0]);
+
+        this.root.appendChild(table);
+        table.appendChild(trHEAD);
+
+        this.raw.map((item, index) => {
+            const th = document.createElement('th');
+            th.innerHTML = item;
+            trHEAD.appendChild(th)
+        });
+
+        for(var i = 0; i < this.data.length; i++) {
+            const trBODY = document.createElement('tr');
+            table.appendChild(trBODY)
+
+            for (var y = 0; y < this.raw.length; y++) {
+                const td = document.createElement('td');
+                td.innerHTML = this.data[i][this.raw[y]];
+                trBODY.appendChild(td);
+            }
+        }
+
+        } catch (e) {
+            console.warn(`[Wrong Table id]-[${this.name}]`)
+        }
+
     }
 }
 
-function getColor() {
-    var result = input.value;
-    input.value = "";
-    btn.disabled = true;
-    colors.push(result);
-    updateList();
-}
+const AmazonTable = new Table("amazon-table", data)
+const UserTable = new Table("user-table", dataNext)
 
-function updateList() {
-    var li = document.createElement('li');
-    li.innerText = "HEX:" + colors[colors.length - 1];
-    li.style.color = colors[colors.length - 1];
-    list.appendChild(li);
-}
+AmazonTable.init()
+UserTable.init()
+
+console.log(AmazonTable)
+console.log(UserTable)
 
 
-
+// Sortable
+// Editable
+// Pagination
+// Infinite scroll
+// Aggregation
